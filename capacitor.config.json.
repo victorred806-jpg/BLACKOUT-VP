@@ -1,0 +1,6 @@
+{
+  "appId": "com.blackout.game",
+  "appName": "BLACKOUT",
+  "webDir": "www",
+  "server": { "androidScheme": "https" }
+}
