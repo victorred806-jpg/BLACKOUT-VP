@@ -1,0 +1,39 @@
+{
+  "name": "blackout",
+  "version": "1.0.0",
+  "description": "BLACKOUT - battle royale 3D",
+  "author": "BLACKOUT",
+  "main": "electron/main.js",
+  "scripts": {
+    "prepare:www": "node scripts/prepare-www.js",
+    "start": "npm run prepare:www && electron .",
+    "dist:win": "npm run prepare:www && electron-builder --win nsis --x64",
+    "android:add": "npm run prepare:www && npx cap add android && node scripts/patch-android.js",
+    "android:sync": "npm run prepare:www && npx cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0",
+    "three": "0.128.0"
+  },
+  "devDependencies": {
+    "electron": "^31.7.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.blackout.game",
+    "productName": "BLACKOUT",
+    "directories": { "output": "dist" },
+    "files": ["electron/**", "www/**", "assets/**", "package.json"],
+    "win": { "target": [{ "target": "nsis", "arch": ["x64"] }], "icon": "assets/icon.png" },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "BLACKOUT"
+    },
+    "artifactName": "BLACKOUT-Setup-${version}.${ext}"
+  }
+}
